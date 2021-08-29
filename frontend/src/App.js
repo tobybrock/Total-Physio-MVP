@@ -1,15 +1,15 @@
 import "./App.css";
 import "./index.css";
-import Product from "./components/Product";
-import data from "./data";
+import { BrowserRouter, withRouter, Switch, Route } from "react-router-dom";
+import HomeScreen from "./screens/HomeScreen";
+import ProductScreen from "./screens/ProductScreen";
 
 //need to section app into components
 
 function App() {
   return (
-    <body>
+    <BrowserRouter>
       <div className="grid-container">
-
         <header className="row">
           <div>
             <a className="brand" href="/">
@@ -21,18 +21,12 @@ function App() {
             <a href="/signin">Sign In</a>
           </div>
         </header>
-      
-        <main>
-          <div>
-            <div className="row center">
-              {data.products.map((product) => (
-                <Product key={product._id} product={product}></Product>
-              ))}
-            </div>
-          </div>
-        </main>
+        <Switch>
+          <Route path="/product/:id" component={withRouter(ProductScreen)}></Route>
+          <Route path="/" component={withRouter(HomeScreen)}></Route>
+        </Switch>
       </div>
-    </body>
+    </BrowserRouter>
   );
 }
 
